@@ -29,6 +29,7 @@ _DEFAULT_SETTINGS = {
     "lock_on_screen_lock": True,
     "show_stealth": False,
     "show_paths": True,
+    "theme": "system",
 }
 
 _SETTINGS_FILE = "settings.json"
@@ -60,6 +61,7 @@ class FileLockerApp(Adw.Application):
 
     def _on_activate(self, app: Adw.Application) -> None:
         self._load_settings()
+        self._apply_theme()
         self._manager = VaultManager()
         self._start_autolock()
 
@@ -108,8 +110,9 @@ class FileLockerApp(Adw.Application):
             log.error("Could not save settings: %s", exc)
 
     def apply_settings(self) -> None:
-        """Push updated settings to the auto-lock manager."""
+        """Push updated settings to the auto-lock manager and apply theme."""
         self.save_settings()
+        self._apply_theme()
         if self._autolock:
             self._autolock.set_idle_timeout(
                 self.settings.get("idle_timeout_seconds", 300)
@@ -122,6 +125,12 @@ class FileLockerApp(Adw.Application):
             self._window._show_stealth = self.settings.get("show_stealth", False)
             self._window._stealth_btn.set_active(self._window._show_stealth)
             self._window._refresh_vault_list()
+
+    def _apply_theme(self) -> None:
+        """Apply the saved colour scheme to the libadwaita style manager."""
+        from .preferences import apply_color_scheme
+        theme = self.settings.get("theme", "system")
+        apply_color_scheme(Adw.StyleManager.get_default(), theme)
 
     # ------------------------------------------------------------------ #
     # Auto-lock                                                            #
