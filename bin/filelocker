@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+"""
+FileLocker launcher script.
+
+Adds the vendored lib directory to sys.path so the app works from both
+the source tree and an installed tarball layout.
+"""
+
+import os
+import sys
+
+# When installed via install.sh the layout is:
+#   ~/.local/bin/filelocker           <- this script (symlink or copy)
+#   ~/.local/lib/filelocker/          <- vendored app code
+#
+# When running from the source tree the layout is:
+#   bin/filelocker                    <- this script
+#   src/                              <- app code
+#
+# Detect which case we're in and set up sys.path accordingly.
+
+_script_dir = os.path.dirname(os.path.realpath(__file__))
+_repo_root  = os.path.dirname(_script_dir)
+
+_src_path = os.path.join(_repo_root, "src")
+_lib_path = os.path.join(os.path.dirname(_script_dir), "lib", "filelocker")
+
+if os.path.isdir(_src_path):
+    sys.path.insert(0, _src_path)
+elif os.path.isdir(_lib_path):
+    sys.path.insert(0, _lib_path)
+else:
+    print(
+        "ERROR: Cannot locate filelocker library files.\n"
+        f"  Looked for: {_src_path}\n"
+        f"           or: {_lib_path}",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+from filelocker.gui.app import main
+
+sys.exit(main())

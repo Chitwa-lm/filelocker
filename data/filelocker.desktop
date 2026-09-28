@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=FileLocker
+GenericName=Vault Manager
+Comment=Create and manage encrypted vaults
+Exec=filelocker %U
+Icon=filelocker
+Categories=Utility;Security;
+Keywords=encrypt;vault;lock;privacy;security;fuse;
+StartupNotify=true
+StartupWMClass=io.github.filelocker
+X-GNOME-UsesNotifications=false

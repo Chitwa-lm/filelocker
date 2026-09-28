@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.filelocker</id>
+  <name>FileLocker</name>
+  <summary>Create and manage encrypted vaults</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <description>
+    <p>
+      FileLocker lets you create encrypted vaults on your Linux desktop.
+      Each vault is a directory whose contents and filenames are encrypted
+      at rest using gocryptfs with AES-GCM. Vaults are mounted via FUSE
+      so they appear as a normal folder when unlocked.
+    </p>
+    <ul>
+      <li>Multiple vaults, each with its own password</li>
+      <li>Auto-lock on idle or screen lock</li>
+      <li>Recovery key shown once at creation</li>
+      <li>Stealth mode to hide vaults from the list</li>
+      <li>No network access or telemetry</li>
+    </ul>
+  </description>
+  <url type="homepage">https://github.com/filelocker/filelocker</url>
+  <url type="bugtracker">https://github.com/filelocker/filelocker/issues</url>
+  <provides>
+    <binary>filelocker</binary>
+  </provides>
+  <releases>
+    <release version="1.0.0" date="2026-09-28">
+      <description><p>Initial release.</p></description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1"/>
+</component>

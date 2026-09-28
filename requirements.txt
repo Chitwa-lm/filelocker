@@ -1,0 +1,16 @@
+# FileLocker runtime dependencies
+#
+# System packages (install via apt, not pip):
+#   sudo apt install gocryptfs fuse3 python3-gi gir1.2-gtk-4.0 gir1.2-adw-1 python3-dbus
+#
+# There are intentionally no pip-installable dependencies.
+# All libraries used are either Python stdlib or system GTK/GObject packages
+# so that the app works from a plain tarball without a virtualenv.
+#
+# Python stdlib used: os, sys, json, secrets, hashlib, subprocess, threading,
+#                     time, signal, logging, pathlib, dataclasses, enum, abc,
+#                     tempfile, shutil, typing
+#
+# System Python packages:
+#   PyGObject (python3-gi)   — GTK4 + libadwaita bindings
+#   dbus-python (python3-dbus) — D-Bus auto-lock signals (optional)

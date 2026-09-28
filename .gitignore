@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*.pyo
+dist/
+*.egg-info/
+.eggs/
+build/
+*.tar.gz
+*.asc
+SHA256SUMS
+.install_manifest
